@@ -1,50 +1,76 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'mirego.release'
+
+group = 'com.mirego.cropimageview'
+version = '1.0.2.2'
 
 buildscript {
-  repositories {
-    jcenter( )
-  }
-  dependencies {
-    classpath 'com.novoda:bintray-release:0.3.4'
-  }
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+    }
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+    delegate.miregoCommon()
+    google()
 }
 
 android {
-  compileSdkVersion 23
-  buildToolsVersion "23.0.2"
-  defaultConfig {
-    minSdkVersion 7
-    targetSdkVersion 23
-    versionCode 1021
-    versionName "1.0.2.1"
-  }
-
-  buildTypes {
-    release {
-      minifyEnabled false
-      shrinkResources true
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1022
+        versionName version
     }
-  }
 
-  lintOptions {
-    textReport true
-  }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
 
-  resourcePrefix 'civ_'
+    resourcePrefix 'civ_'
 }
+
+bintray {
+    pkg {
+        repo = 'common-mobile'
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+            }
+        }
+    }
+}
+
+release {
+    checkTasks = [
+            ':clean',
+            ':check'
+    ]
+    buildTasks = [
+            ':bintrayUpload'
+    ]
+}
+
 
 dependencies {
-  compile 'com.android.support:support-annotations:23.2.1'
-}
-
-publish {
-  userOrg = 'm3n0r'
-  artifactId = 'cropimageview'
-  uploadName = 'CropImageView'
-  groupId = 'com.cesards.android'
-  publishVersion = '1.0.2.1'
-  desc = 'Widget allows you crop from whatever side in an ImageView. Currently Android only supports centerCrop type of cropping'
-  licences = ["Apache-2.0"]
-  website = 'https://github.com/cesards/CropImageView'
+    compile 'com.android.support:support-annotations:27.0.0'
 }

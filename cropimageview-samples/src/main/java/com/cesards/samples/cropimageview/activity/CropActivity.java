@@ -25,12 +25,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import com.cesards.samples.cropimageview.BackgroundToForegroundTransformer;
 import com.cesards.samples.cropimageview.R;
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public abstract class CropActivity extends BaseActivity {
 
-  @Bind(R.id.crop_pager)
+  @BindView(R.id.crop_pager)
   ViewPager pagerView;
 
   protected abstract int getImagesCount();
