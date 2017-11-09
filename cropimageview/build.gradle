@@ -47,6 +47,8 @@ bintray {
     pkg {
         repo = 'common-mobile'
     }
+
+    configurations = ['archives']
 }
 
 install {
