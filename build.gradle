@@ -1,9 +1,21 @@
 buildscript {
-  dependencies {
-    classpath 'com.android.tools.build:gradle:3.0.0'
-  }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.0'
+    }
+}
+
+apply plugin: 'mirego.release'
+
+release {
+    checkTasks = [
+            ':cropimageview:clean',
+            ':cropimageview:check'
+    ]
+    buildTasks = [
+            ':cropimageview:bintrayUpload'
+    ]
 }
 
 task clean(type: Delete) {
-  delete rootProject.buildDir
+    delete rootProject.buildDir
 }
