@@ -5,7 +5,6 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'mirego.release'
 
 group = 'com.mirego.cropimageview'
-version = '1.0.2.2'
 
 buildscript {
     repositories {
@@ -62,8 +61,7 @@ install {
 
 release {
     checkTasks = [
-            ':clean',
-            ':check'
+            ':clean'
     ]
     buildTasks = [
             ':bintrayUpload'
