@@ -33,6 +33,10 @@ android {
         versionName version
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
     buildTypes {
         release {
             minifyEnabled false
