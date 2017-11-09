@@ -1,6 +1,8 @@
 buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
     }
 }
 
@@ -14,6 +16,32 @@ release {
     buildTasks = [
             ':cropimageview:bintrayUpload'
     ]
+}
+
+subprojects {
+    apply plugin: 'com.android.library'
+    apply plugin: 'com.jfrog.bintray'
+    apply plugin: 'com.github.dcendents.android-maven'
+
+    group = 'com.mirego.cropimageview'
+
+    bintray {
+        pkg {
+            repo = 'common-mobile'
+        }
+
+        configurations = ['archives']
+    }
+
+    install {
+        repositories.mavenInstaller {
+            pom {
+                project {
+                    packaging 'aar'
+                }
+            }
+        }
+    }
 }
 
 task clean(type: Delete) {

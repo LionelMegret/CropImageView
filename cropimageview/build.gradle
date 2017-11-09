@@ -1,18 +1,7 @@
-apply plugin: 'com.android.library'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.github.dcendents.android-maven'
-
-
-group = 'com.mirego.cropimageview'
-
 buildscript {
     repositories {
         jcenter()
         mavenCentral()
-    }
-    dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
     }
 }
 
@@ -41,25 +30,6 @@ android {
 
     resourcePrefix 'civ_'
 }
-
-bintray {
-    pkg {
-        repo = 'common-mobile'
-    }
-
-    configurations = ['archives']
-}
-
-install {
-    repositories.mavenInstaller {
-        pom {
-            project {
-                packaging 'aar'
-            }
-        }
-    }
-}
-
 
 dependencies {
     compile 'com.android.support:support-annotations:27.0.0'
